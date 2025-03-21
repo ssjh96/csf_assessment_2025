@@ -1,16 +1,57 @@
 <div class="row mt-3">
   <div class="col d-flex justify-content-between align-items-center">
-    <div class="fs-1 fw-bold text-primary">Menu ($XXX)</div>
+    <div class="fs-1 fw-bold text-primary">Menu ({{totalObs$ | async | currency}})</div>
     <div>
-      <button type="button" class="btn btn-primary">
-        Place Order (XXX)
+      <!-- <button type="button" class="btn btn-primary" [disabled]="totalObs$"> -->
+      <button type="button" [routerLink]="['/place-order']" class="btn btn-primary" [disabled]="getTotalInCart() < 1">
+        Place Order ({{getTotalInCart()}})
       </button>
     </div>
   </div>
 </div>
+@for (menuItem of menuList$ | async; track $index) 
+{
+
+  <div class="row mb-2">
+    <div class="col">
+      <div class="menu-item">
+        <div>
+          <button type="button" class="btn btn-warning"
+            (click)="removeFromCart(menuItem.id)">
+            <i class="bi bi-x-square"></i>
+          </button>
+        </div>
+        <div class="menu-details">
+          <div>Name: <span class="fw-bold"> {{menuItem.name}} </span> </div>
+          <div>Description:
+            <span class="fst-italic">
+              {{menuItem.description}}
+            </span>
+          </div>
+          <div></div>
+          @if (getItemQuantity(menuItem.id) > 0) {
+            <div class="text-danger fw-bold">Quantity: {{ getItemQuantity(menuItem.id) }}</div>
+          }
+        </div>
+        <div class="menu-button-end">
+          <button type="button" class="btn btn-success"
+            (click)="addToCart(menuItem)">
+            <i class="bi bi-plus-circle"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <p>{{menuItem.id}}</p>
+  <p>{{menuItem.name}}</p>
+  <p>{{menuItem.price}}</p>
+  <p>{{menuItem.description}}</p> -->
+}      
+
+
 
 <!-- each row display a single mene item -->
-<div class="row mb-2">
+<!-- <div class="row mb-2">
   <div class="col">
     <div class="menu-item">
       <div>
@@ -62,4 +103,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

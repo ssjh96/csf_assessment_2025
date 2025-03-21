@@ -1,1 +1,6 @@
 # TODO: Task 1.1
+local:
+mongoimport -d=restaurant -c=menus --type=json --jsonArray --file=menus.json
+
+railway mongo import: 
+mongoimport --uri="mongodb://USER:PASSWORD@roundhouse.proxy.rlwy.net:PORTNUMBER/csf2023?authSource=admin" -d=restaurant -c=menus --type=json --jsonArray --file=menus.json
