@@ -1,5 +1,5 @@
 # build the client
-FROM  node:23 AS buildang
+FROM  node:18 AS buildang
 
 WORKDIR /src
 
@@ -15,7 +15,7 @@ RUN npm i -g @angular/cli
 RUN ng build
 
 # Build the SpringBoot application
-FROM eclipse-temurin:23-jdk AS buildjava
+FROM maven:3.9.9-eclipse-temurin-23 AS buildjava
 
 WORKDIR /src
 
