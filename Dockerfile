@@ -31,7 +31,7 @@ COPY --from=buildang /src/dist/client/browser/* src/main/resources/static
 # make mvnw executable
 RUN chmod a+x mvnw
 # produce target/server-0.0.1-SNAPSHOT.jar
-RUN ./mvnw package -Dtest.skip=true 
+RUN ./mvnw package -Dtest.skip=true
 
 # Deployment container
 FROM eclipse-temurin:23-jre
